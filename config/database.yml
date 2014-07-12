@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+
+development:
+  <<: *default
+  database: electric-dev
+
+test:
+  <<: *default
+  database: electric-test
+
+production:
+  <<: *default
+  database: electric-prod
