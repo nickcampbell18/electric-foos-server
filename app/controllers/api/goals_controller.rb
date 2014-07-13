@@ -1,5 +1,5 @@
 module Api
-  class GamesController < ApplicationController
+  class GoalsController < ApplicationController
 
     before_filter :ensure_required_create_params
 
@@ -10,7 +10,7 @@ module Api
     private
 
     def required_create_params
-      %w[silver_team black_team timestamp]
+      %w[game_id team timestamp]
     end
 
   end
