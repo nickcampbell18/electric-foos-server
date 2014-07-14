@@ -11,17 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140713092219) do
+ActiveRecord::Schema.define(version: 20140713104627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "games", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.uuid     "silver_player_one"
-    t.uuid     "silver_player_two"
-    t.uuid     "black_player_one"
-    t.uuid     "black_player_two"
+    t.integer  "silver_sig_one_id"
+    t.integer  "silver_sig_two_id"
+    t.integer  "black_sig_one_id"
+    t.integer  "black_sig_two_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "goals", force: true do |t|
+    t.uuid     "game_id"
+    t.string   "team"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,5 +41,7 @@ ActiveRecord::Schema.define(version: 20140713092219) do
     t.string "sig",       limit: 100
     t.uuid   "player_id"
   end
+
+  add_index "signatures", ["sig"], name: "index_signatures_on_sig", unique: true, using: :btree
 
 end

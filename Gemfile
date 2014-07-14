@@ -9,6 +9,12 @@ gem 'pg'
 # Run with speed.
 gem 'puma'
 
+# Rails.cache
+gem 'redis-rails'
+
+# Background jobs
+gem 'resque'
+
 group :test do
   gem 'minitest', '5.4.0'
   gem 'guard-minitest'

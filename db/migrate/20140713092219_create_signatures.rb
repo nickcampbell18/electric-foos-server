@@ -4,5 +4,6 @@ class CreateSignatures < ActiveRecord::Migration
       t.string :sig, limit: 100
       t.uuid :player_id
     end
+    add_index :signatures, :sig, unique: true
   end
 end
