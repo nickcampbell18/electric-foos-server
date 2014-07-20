@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 
+  attr_accessor :current_user
+
   private
 
   def ensure_required_create_params

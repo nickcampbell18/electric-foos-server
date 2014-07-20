@@ -1,7 +1,14 @@
 module Api
   class GamesController < ApplicationController
 
-    before_filter :ensure_required_create_params
+    respond_to :json
+
+    before_filter :ensure_required_create_params, only: :create
+
+    def show
+      @game = Game.find params[:id]
+      respond_with @game
+    end
 
     def create
       start_time = Time.parse params[:timestamp]
@@ -12,9 +19,11 @@ module Api
         return render text: 'Must provide at least one silver team player and black team player', status: 400
       end
 
-      game = Game.create
+      game = Game.create unclaimed_signatures: { silver_team: silvers,
+                                                 black_team:  blacks },
+                         created_at: start_time
 
-      Resque.push 'games', class: 'GameCreatorJob', args: [game.id, silvers, blacks, start_time]
+      Resque.push 'games', class: 'PlayerCalculatorJob', args: [game.id]
       return render json: {game_id: game.id}, status: :created
     end
 

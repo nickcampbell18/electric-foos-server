@@ -11,17 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140713104627) do
+ActiveRecord::Schema.define(version: 20140720151055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "games", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.integer  "silver_sig_one_id"
-    t.integer  "silver_sig_two_id"
-    t.integer  "black_sig_one_id"
-    t.integer  "black_sig_two_id"
+    t.json     "unclaimed_signatures"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,14 +31,22 @@ ActiveRecord::Schema.define(version: 20140713104627) do
   end
 
   create_table "players", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.string "name", limit: 64
+    t.string "name",         limit: 64
+    t.string "signatures",              default: [], array: true
+    t.json   "yammer_props"
   end
 
-  create_table "signatures", force: true do |t|
-    t.string "sig",       limit: 100
-    t.uuid   "player_id"
+  add_index "players", ["signatures"], name: "index_players_on_signatures", using: :gin
+
+  create_table "teams", force: true do |t|
+    t.uuid    "game_id"
+    t.uuid    "player_one_id"
+    t.uuid    "player_two_id"
+    t.integer "team_colour",   default: 0
   end
 
-  add_index "signatures", ["sig"], name: "index_signatures_on_sig", unique: true, using: :btree
+  add_index "teams", ["game_id"], name: "index_teams_on_game_id", using: :btree
+  add_index "teams", ["player_one_id"], name: "index_teams_on_player_one_id", using: :btree
+  add_index "teams", ["player_two_id"], name: "index_teams_on_player_two_id", using: :btree
 
 end

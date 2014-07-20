@@ -1,5 +1,7 @@
 class Player < ActiveRecord::Base
 
-  has_many :signatures
+  def self.find_by_signature(sig)
+    where('? = ANY (signatures)', sig).first
+  end
 
 end

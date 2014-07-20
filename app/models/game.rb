@@ -1,9 +1,6 @@
 class Game < ActiveRecord::Base
 
-  belongs_to :silver_sig_one, class_name: 'Signature'
-  belongs_to :silver_sig_two, class_name: 'Signature'
-  belongs_to :black_sig_one, class_name: 'Signature'
-  belongs_to :black_sig_two, class_name: 'Signature'
+  has_many :teams
 
   def score
     [silver_score, black_score].join ' - '
