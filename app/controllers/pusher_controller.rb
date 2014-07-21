@@ -1,7 +1,7 @@
 class PusherController < ApplicationController
 
   def receive
-    payload['events'].each do |event|
+    params['events'].each do |event|
       if event['name'] == 'find_user'
 
         if player = Player.find_by_signature(event['signature'])
@@ -18,12 +18,7 @@ class PusherController < ApplicationController
 
       end
     end
+    head :ok
   end
-
-  private
-
-    def payload
-      @_p ||= JSON.parse request.body
-    end
 
 end

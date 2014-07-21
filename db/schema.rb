@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20140720151055) do
   end
 
   create_table "players", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.string "name",         limit: 64
-    t.string "signatures",              default: [], array: true
-    t.json   "yammer_props"
+    t.string "name",       limit: 64
+    t.string "signatures",             default: [], array: true
+    t.string "mugshot",    limit: 120
   end
 
   add_index "players", ["signatures"], name: "index_players_on_signatures", using: :gin
