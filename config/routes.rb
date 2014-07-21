@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/auth/:provider/callback', to: 'sessions#create'
+  post 'push-hook', to: 'pusher#receive'
 
   mount Resque::Server, at: '/queue'
 

@@ -15,9 +15,7 @@ gem 'redis-rails'
 # Background jobs
 gem 'resque'
 
-# Yammer integration
-gem 'omniauth'
-gem 'omniauth-yammer'
+gem 'pusher'
 
 group :test do
   gem 'minitest', '5.4.0'

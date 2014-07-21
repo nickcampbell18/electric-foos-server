@@ -6,7 +6,8 @@ class CreatePlayers < ActiveRecord::Migration
 
       t.string :signatures, array: true, default: '{}'
       t.index :signatures, using: 'gin'
-      t.column :yammer_props, :json
+
+      t.string :mugshot, limit: 120
     end
   end
 end
