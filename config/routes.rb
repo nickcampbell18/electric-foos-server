@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :games, only: %i[show create] do
       resources :goals, only: %i[create]
     end
+    resources :signatures, only: :show
   end
 
   post 'push-hook', to: 'pusher#receive'

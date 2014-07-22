@@ -7,7 +7,14 @@ class Team < ActiveRecord::Base
   belongs_to :player_two, class_name: 'Player'
 
   def players
-    [player_one, player_two]
+    [player_one, player_two].compact
+  end
+
+  def as_push
+    {
+      team_colour: team_colour,
+      players: players.map(&:as_push)
+    }
   end
 
 end

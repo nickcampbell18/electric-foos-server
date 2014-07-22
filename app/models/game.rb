@@ -6,6 +6,15 @@ class Game < ActiveRecord::Base
     [silver_score, black_score].join ' - '
   end
 
+  def as_push
+    {
+      type: 'Game',
+      id: id,
+      silver_team: teams.first.as_push,
+      black_team:  teams.last.as_push
+    }
+  end
+
   private
 
   def silver_score

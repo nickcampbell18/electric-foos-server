@@ -13,3 +13,5 @@ test:
 production:
   <<: *default
   database: electric-prod
+  username: azureuser
+  password: electric
