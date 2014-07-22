@@ -3,7 +3,7 @@ module Api
 
     def show
       opts = {team: params.fetch(:team, 'unknown')}
-      if Player.find_by_signature params[:id]
+      if player = Player.find_by_signature(params[:id])
         Pusher['registration'].trigger 'player_found', player.as_push.merge(opts)
       end
       head :ok
