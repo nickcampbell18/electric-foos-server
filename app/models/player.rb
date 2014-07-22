@@ -4,11 +4,13 @@ class Player < ActiveRecord::Base
     where('? = ANY (signatures)', sig).first
   end
 
-  def as_push
+  def as_push(signature: signatures.first)
     {
-      signature: signatures,
+      type:      :player,
+      signature: signature,
       name:      name,
-      mugshot:   mugshot
+      mugshot:   mugshot,
+      permalink: permalink
     }
   end
 

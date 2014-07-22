@@ -12,9 +12,15 @@ class Team < ActiveRecord::Base
 
   def as_push
     {
-      team_colour: team_colour,
-      players: players.map(&:as_push)
+      type:    :team,
+      colour:  team_colour,
+      players: players.map(&:as_push),
+      score:   score
     }
+  end
+
+  def score
+    Score.new(game_id).send team_colour.to_sym
   end
 
 end

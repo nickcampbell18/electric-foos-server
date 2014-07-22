@@ -1,28 +1,17 @@
 class Game < ActiveRecord::Base
 
-  has_many :teams
+  FINAL_SCORE = 10
 
-  def score
-    [silver_score, black_score].join ' - '
-  end
+  has_many :teams
 
   def as_push
     {
-      type: 'Game',
+      type: :game,
       id: id,
-      silver_team: teams.first.as_push,
-      black_team:  teams.last.as_push
+      teams: teams.map(&:as_push),
+      final_score: FINAL_SCORE,
+      ended: false
     }
-  end
-
-  private
-
-  def silver_score
-    Score.new(id).silver
-  end
-
-  def black_score
-    Score.new(id).black
   end
 
 end
