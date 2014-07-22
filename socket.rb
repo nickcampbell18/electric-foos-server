@@ -1,5 +1,4 @@
 require 'em-websocket'
-require 'byebug'
 
 EM.run do
 
