@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     resources :games, only: %i[show create] do
       resources :goals, only: %i[create]
     end
-    resources :signatures, only: :show
+
+    resources :players, only: :create
+
+    resources :signatures, only: %i[show create] # Ask Ray to POST
+
+    get '/stream', to: 'streams#stream'
   end
 
   post 'push-hook', to: 'pusher#receive'
