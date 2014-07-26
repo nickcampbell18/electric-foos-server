@@ -7,7 +7,7 @@ class Team < ActiveRecord::Base
   belongs_to :player_two, class_name: 'Player'
 
   def players
-    [player_one, player_two].compact
+    [player_one, player_two]
   end
 
   def as_json

@@ -2,6 +2,9 @@ class PlayerCalculatorJob
 
   def self.perform(game_id)
     game = Game.find(game_id)
+
+    return true if game.teams.any?
+
     silvers = game.unclaimed_signatures['silver_team']
     blacks  = game.unclaimed_signatures['black_team']
 
