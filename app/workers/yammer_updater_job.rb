@@ -12,7 +12,8 @@ class YammerUpdaterJob
     if response && response.body && response.body[0]
       body = response.body[0]
       player.update_attributes mugshot: body[:mugshot_url],
-                               name:    body[:full_name],
-
+                               name:    body[:full_name]
+      player.save
     end
   end
+end

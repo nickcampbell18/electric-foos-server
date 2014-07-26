@@ -4,12 +4,9 @@ Rails.application.routes.draw do
 
   namespace :api do
 
-    resources :games, only: %i[show create update] do
-      post '/goals/:team', on: :member,
-                           to: 'goals#create'
-    end
+    resources :games, only: %i[show create update]
 
-    resources :goals, only: :create
+    post '/games/:game_id/goals/:team', to: 'goals#create'
 
     resources :players, only: :create
 
