@@ -25,8 +25,7 @@ ActiveRecord::Schema.define(version: 20140722170144) do
   end
 
   create_table "goals", force: true do |t|
-    t.uuid     "game_id"
-    t.string   "team"
+    t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

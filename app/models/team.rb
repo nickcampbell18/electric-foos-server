@@ -10,17 +10,22 @@ class Team < ActiveRecord::Base
     [player_one, player_two].compact
   end
 
-  def as_push
+  def as_json
     {
       type:    :team,
       colour:  team_colour,
-      players: players.map(&:as_push),
+      players: players.map(&:as_json),
       score:   score
     }
   end
 
+  def self.find_by_game_and_colour(game, colour)
+    integer = team_colours.fetch(colour.to_s)
+    find_by game: game, team_colour: integer
+  end
+
   def score
-    Score.new(game_id).send team_colour.to_sym
+    Score.new(id).score
   end
 
 end

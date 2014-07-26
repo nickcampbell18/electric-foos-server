@@ -4,11 +4,11 @@ class Game < ActiveRecord::Base
 
   has_many :teams
 
-  def as_push
+  def as_json(*args)
     {
       type: :game,
       id: id,
-      teams: teams.map(&:as_push),
+      teams: teams.map(&:as_json),
       final_score: FINAL_SCORE,
       ended: false
     }

@@ -4,7 +4,7 @@ class Player < ActiveRecord::Base
     where('? = ANY (signatures)', sig).first
   end
 
-  def as_push(signature: signatures.first)
+  def as_json(signature: signatures.first)
     {
       type:      :player,
       signature: signature,

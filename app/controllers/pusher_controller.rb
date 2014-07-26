@@ -5,7 +5,7 @@ class PusherController < ApplicationController
       if event['name'] == 'find_user'
 
         if player = Player.find_by_signature(event['signature'])
-          Pusher['registration'].trigger 'player_found', player.as_push
+          Pusher['registration'].trigger 'player_found', player.as_json
         end
 
       elsif event['name'] == 'create_user'
@@ -14,7 +14,7 @@ class PusherController < ApplicationController
                                 signatures: [event['signature']],
                                 mugshot: event['mugshot']
 
-        Pusher['registration'].trigger 'player_created', player.as_push
+        Pusher['registration'].trigger 'player_created', player.as_json
 
       end
     end

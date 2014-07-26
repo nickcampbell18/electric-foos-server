@@ -1,7 +1,6 @@
 class Score
 
-  def initialize(game_id, team_id, cache: Rails.cache)
-    @game_id = game_id
+  def initialize(team_id, cache: Rails.cache)
     @team_id = team_id
     @cache = cache
   end
@@ -17,7 +16,7 @@ class Score
   private
 
   def cache_key
-    [:score, @game_id, @team_id].join(':')
+    [:score, :team, @team_id].join(':')
   end
 
 end

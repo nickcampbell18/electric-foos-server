@@ -4,6 +4,8 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "rails/test_unit/railtie"
 
+require_relative '../lib/active_record_ext'
+
 Bundler.require(*Rails.groups)
 
 module Electric

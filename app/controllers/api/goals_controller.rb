@@ -5,13 +5,17 @@ module Api
 
     def create
       unless game
-        return render text: 'Game not found.'
+        return render json: {errors: ['Game not found.']}
       end
       unless params[:team].to_s.in? %w[silver black]
-        return render text: 'Team must be "silver" or "black".'
+        return render json: {errors: ['Team must be "silver" or "black"']}
       end
-      Resque.push 'goals', class: 'GoalCreatorJob', args: [game.id, params[:team], timestamp]
-      head :created
+
+      team = Team.find_by_game_and_colour(game, params[:team])
+
+      Goal.create team: team, created_at: timestamp
+
+      respond_with :api, game, status: :created
     end
 
     private

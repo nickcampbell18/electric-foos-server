@@ -1,12 +1,21 @@
 module Api
   class SignaturesController < ApplicationController
 
-    def show
-      opts = {team: params.fetch(:team, 'unknown')}
-      if player = Player.find_by_signature(params[:id])
-        Pusher['registration'].trigger 'player_found', player.as_push.merge(opts)
+    before_filter :ensure_required_create_params
+
+    def create
+      if player = Player.find_by_signature(params[:rfid])
+        @player = player
+      else
+        @player = Player.create signatures: [params[:rfid]]
       end
-      head :ok
+      return render json: @player.as_json
+    end
+
+    private
+
+    def required_create_params
+      %w[team rfid]
     end
 
   end

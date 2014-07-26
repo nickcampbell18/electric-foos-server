@@ -21,6 +21,10 @@ EM.run do
 
   end
 
+  EM.add_timer(5) do
+    @channel.push "NOTHING"
+  end
+
   puts "Server started..."
 
 end
