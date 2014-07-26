@@ -1,8 +1,16 @@
 require 'em-websocket'
+require 'em-hiredis'
 
 EM.run do
 
   @channel = EM::Channel.new
+
+  @redis = EM::Hiredis.connect.pubsub
+  @redis.subscribe('ws')
+  @redis.on(:message) do |_, message|
+    puts "redis -> #{message}"
+    @channel.push message
+  end
 
   EM::WebSocket.run(:host => "0.0.0.0", :port => 9090) do |ws|
 

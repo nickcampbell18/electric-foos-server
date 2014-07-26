@@ -15,5 +15,7 @@ class YammerUpdaterJob
                                name:    body[:full_name]
       player.save
     end
+
+    Publisher.publish(player.as_json)
   end
 end

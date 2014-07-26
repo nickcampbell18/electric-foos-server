@@ -18,9 +18,6 @@ gem 'redis-rails'
 # Background jobs
 gem 'resque'
 
-# Websockets
-gem 'pusher' # TODO
-
 # Yammer integration
 gem 'yam'
 

@@ -1,3 +1,6 @@
+require 'json'
+require 'redis'
+
 module Api
   class ApplicationController < ::ApplicationController
 
@@ -15,6 +18,10 @@ module Api
 
     def not_found
       return render status: 404, json: {error: 'Could not find that, sorry.'}
+    end
+
+    def publish(object)
+      Publisher.publish(object)
     end
 
   end

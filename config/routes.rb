@@ -17,8 +17,6 @@ Rails.application.routes.draw do
 
   get '/', to: 'web#index'
 
-  post 'push-hook', to: 'pusher#receive'
-
   mount Resque::Server, at: '/queue'
 
 end
