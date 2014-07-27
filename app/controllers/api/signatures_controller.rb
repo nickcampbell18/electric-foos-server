@@ -9,6 +9,7 @@ module Api
       else
         @player = Player.create signatures: [params[:rfid]]
       end
+      Publisher.publish @player
       return render json: @player.as_json
     end
 
