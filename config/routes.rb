@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
     resources :games, only: %i[show create update]
 
-    post '/games/:game_id/goals/:team', to: 'goals#create'
+    post   '/games/:game_id/goals/:team', to: 'goals#create'
+    delete '/games/:game_id/goals/:team', to: 'goals#cancel'
 
     resources :players, only: :create
 

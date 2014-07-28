@@ -17,6 +17,10 @@ class Score
     @cache.increment cache_key
   end
 
+  def decrement
+    @cache.decrement cache_key
+  end
+
   private
 
   def cache_key
