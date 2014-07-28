@@ -5,9 +5,14 @@ class YammerUpdaterJob
 
     return unless player.permalink?
 
-    email = [player.permalink, 'microsoft.com'].join('@')
+    email = [player.permalink, 'yammer-inc.com'].join('@')
 
     response = Yammer.get_user_by_email(email)
+
+    if response.code.to_s =~ /404/
+      email = [player.permalink, 'microsoft.com'].join('@')
+      response = Yammer.get_user_by_email(email)
+    end
 
     if response && response.body && response.body[0]
       body = response.body[0]
