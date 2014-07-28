@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
       id: id,
       teams: teams.map(&:as_json),
       final_score: FINAL_SCORE,
-      ended: false
+      ended: ended?
     }
   end
 
