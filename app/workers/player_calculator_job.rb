@@ -23,6 +23,8 @@ class PlayerCalculatorJob
     game.teams.create player_one: black_players[0],
                       player_two: black_players[1],
                       team_colour: :black
+
+    Publisher.publish game
   end
 
 end
