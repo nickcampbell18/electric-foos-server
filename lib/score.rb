@@ -10,7 +10,7 @@ class Score
   end
 
   def score=(score)
-    @cache.set cache_key, score, raw: true
+    @cache.write cache_key, score, raw: true
   end
 
   def increment
