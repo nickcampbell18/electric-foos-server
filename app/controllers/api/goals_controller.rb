@@ -1,8 +1,6 @@
 module Api
   class GoalsController < ApplicationController
 
-    respond_to :json
-
     before_filter :ensure_required_create_params,
                   :require_game
 
@@ -11,36 +9,40 @@ module Api
         return render json: {errors: ['Team must be "silver" or "black"']}
       end
 
-      team = Team.find_by_game_and_colour(game, params[:team])
-
-      Goal.create team: team, created_at: timestamp
-      Score.new(team.id).increment
-
-      respond_with :api, game
-    end
-
-    def cancel
-      team = Team.find_by_game_and_colour(game, params[:team])
-
-      if team
-        goal = team.goals.order('created_at DESC').first
-        if goal
-          goal.destroy
-          Score.new(team.id).decrement
+      if scorer.score < 10
+        time = params.fetch(:timestamp) { Time.now.to_i }
+        team.score_goal!(time)
+        if team.score == 10
+          game.update ended: true
         end
       end
 
-      respond_with :api, game
+      render json: game
+    end
+
+    def cancel
+      if team
+        team.cancel_goal!
+      end
+
+      render json: game
     end
 
     private
+
+    def scorer
+      @_s ||= Scorer.new(team.id)
+    end
+
+    def team
+      @_t ||= Team.find_by_game_and_colour(game, params[:team])
+    end
 
     def require_game
       unless game
         return render json: {errors: ['Game not found.']}
       end
     end
-
 
     def game
       @_g ||= Game.find params[:game_id]

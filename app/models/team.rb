@@ -6,8 +6,6 @@ class Team < ActiveRecord::Base
   belongs_to :player_one, class_name: 'Player'
   belongs_to :player_two, class_name: 'Player'
 
-  has_many :goals
-
   def players
     [player_one, player_two]
   end
@@ -27,12 +25,15 @@ class Team < ActiveRecord::Base
     find_by game: game, team_colour: integer
   end
 
-  delegate :score, :score=, to: :scorer
+  delegate :score, :score=,
+           :score_goal!, :cancel_goal!,
+           :goal_times, :last_goal_time,
+           to: :scorer
 
   private
 
   def scorer
-    Score.new(id)
+    Scorer.new(id)
   end
 
 end

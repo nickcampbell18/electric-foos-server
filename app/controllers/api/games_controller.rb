@@ -26,7 +26,7 @@ module Api
       end
 
       @game = Game.create unclaimed_signatures: { silver_team: silvers,
-                                                 black_team:  blacks },
+                                                  black_team:  blacks },
                           created_at: start_time
 
       Resque.push 'games', class: 'PlayerCalculatorJob', args: [@game.id]

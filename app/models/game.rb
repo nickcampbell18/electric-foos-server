@@ -3,7 +3,6 @@ class Game < ActiveRecord::Base
   FINAL_SCORE = 10
 
   has_many :teams
-  has_many :goals, through: :teams
 
   scope :current, -> do
     where(ended: false).order('updated_at DESC').first
@@ -20,9 +19,7 @@ class Game < ActiveRecord::Base
   end
 
   def last_goal_time
-    if last_goal = goals.last
-      last_goal.created_at
-    end
+    teams.map(&:last_goal_time).max
   end
 
 end
