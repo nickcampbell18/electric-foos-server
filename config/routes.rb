@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   namespace :api do
 
-    resources :games, only: %i[show create update]
+    resources :games, only: %i[show create update] do
+      get :current, on: :collection
+    end
 
     post   '/games/:game_id/goals/:team', to: 'goals#create'
     delete '/games/:game_id/goals/:team', to: 'goals#cancel'

@@ -10,6 +10,10 @@ module Api
       respond_with @game
     end
 
+    def current
+      respond_with Game.current
+    end
+
     def create
       start_time = Time.parse params[:timestamp]
       silvers = coerce_array params[:silver_team]

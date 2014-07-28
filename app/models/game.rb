@@ -4,6 +4,10 @@ class Game < ActiveRecord::Base
 
   has_many :teams
 
+  scope :current, -> do
+    where(ended: false).order('updated_at DESC').first
+  end
+
   def as_json(*args)
     {
       type: :game,
