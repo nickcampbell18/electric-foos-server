@@ -10,8 +10,9 @@ class Team < ActiveRecord::Base
     [player_one, player_two]
   end
 
-  def as_json
+  def as_json(*args)
     {
+      id:      id,
       type:    :team,
       colour:  team_colour,
       players: players.map(&:as_json),
@@ -24,8 +25,12 @@ class Team < ActiveRecord::Base
     find_by game: game, team_colour: integer
   end
 
-  def score
-    Score.new(id).score
+  delegate :score, :score=, to: :scorer
+
+  private
+
+  def scorer
+    Score.new(id)
   end
 
 end

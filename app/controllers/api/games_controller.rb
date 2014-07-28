@@ -1,6 +1,8 @@
 module Api
   class GamesController < ApplicationController
 
+    respond_to :json
+
     before_filter :ensure_required_create_params, only: :create
 
     def show
@@ -25,6 +27,19 @@ module Api
 
       Resque.push 'games', class: 'PlayerCalculatorJob', args: [@game.id]
       respond_with :api, @game, status: :created
+    end
+
+    def update
+      game = Game.find params[:id]
+      params[:teams].map do |obj|
+        team = Team.find obj[:id]
+
+        if team.score != obj[:score]
+          team.score = obj[:score]
+        end
+      end
+      Publisher.publish game
+      respond_with game
     end
 
     private

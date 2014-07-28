@@ -9,6 +9,10 @@ class Score
     @cache.fetch(cache_key, raw: true) { 0 }.to_i
   end
 
+  def score=(score)
+    @cache.set cache_key, score, raw: true
+  end
+
   def increment
     @cache.increment cache_key
   end

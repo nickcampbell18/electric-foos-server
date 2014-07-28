@@ -1,6 +1,8 @@
 module Api
   class GoalsController < ApplicationController
 
+    respond_to :json
+
     before_filter :ensure_required_create_params
 
     def create

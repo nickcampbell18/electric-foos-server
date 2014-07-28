@@ -4,8 +4,6 @@ require 'redis'
 module Api
   class ApplicationController < ::ApplicationController
 
-    respond_to :json
-
     before_action :authenticate
 
     rescue_from ActiveRecord::RecordNotFound, :with => :not_found
