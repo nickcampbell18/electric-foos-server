@@ -20,7 +20,6 @@ class YammerUpdaterJob
       body = response.body[0]
       player.update_attributes mugshot: fix_mugshot(body[:mugshot_url_template]),
                                name:    body[:full_name]
-      player.save
     end
 
     Publisher.publish(player.as_json)

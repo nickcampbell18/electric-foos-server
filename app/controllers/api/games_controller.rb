@@ -30,6 +30,8 @@ module Api
                           created_at: start_time
 
       Resque.push 'games', class: 'PlayerCalculatorJob', args: [@game.id]
+      Resque.push 'games', class: 'GameCleanerUpperer',  args: [@game.id]
+
       respond_with :api, @game, status: :created
     end
 
