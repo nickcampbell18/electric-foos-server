@@ -26,7 +26,11 @@ module Private
 
     def cancel
       if team
+        score = team.score
         team.cancel_goal!
+        if score == 10
+          game.update ended: false
+        end
       end
 
       render json: game
