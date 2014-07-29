@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
     namespace :public do
       resources :players, only: [:index, :show]
+      resources :games,   only: [:index, :show]
     end
   end
 

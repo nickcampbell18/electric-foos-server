@@ -24,7 +24,6 @@ gem 'yam'
 # Monitor performance
 gem 'newrelic_rpm'
 
-
 group :test do
   gem 'minitest', '5.4.0'
   gem 'guard-minitest'
