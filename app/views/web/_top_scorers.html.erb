@@ -6,4 +6,13 @@
       <th>Goals</th>
     </tr>
   </thead>
+  <% locals[:players_and_scores].
+        sort_by {|h,v| - v.to_i }.
+        each_with_index do |(player_id, score), idx| %>
+    <tr>
+      <td><%= idx + 1 %></td>
+      <td><%= Player.find(player_id).try(:name) %></td>
+      <td><%= score %></td>
+    </tr>
+  <% end %>
 </table>

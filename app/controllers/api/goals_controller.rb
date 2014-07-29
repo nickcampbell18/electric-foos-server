@@ -15,7 +15,10 @@ module Api
         if team.score == 10
           game.update ended: true
         end
+        Resque.push 'metrics', class: 'MetricsGenerator'
       end
+
+      Publisher.publish game
 
       render json: game
     end
