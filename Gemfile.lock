@@ -74,6 +74,7 @@ GEM
     minitest (5.4.0)
     mono_logger (1.1.0)
     multi_json (1.10.1)
+    newrelic_rpm (3.9.0.229)
     oauth2-client (2.0.0)
       addressable (~> 2.3)
       bcrypt-ruby (~> 3.0)
@@ -180,6 +181,7 @@ DEPENDENCIES
   dotenv-rails
   guard-minitest
   minitest (= 5.4.0)
+  newrelic_rpm
   pg
   pry-byebug
   puma
