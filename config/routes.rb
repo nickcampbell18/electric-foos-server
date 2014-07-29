@@ -3,11 +3,12 @@ require 'resque/server'
 Rails.application.routes.draw do
 
   namespace :api do
+
+    get '/games/current', to: 'public/games#current'
+
     scope module: 'private' do
 
-      resources :games, only: %i[show create update] do
-        get :current, on: :collection
-      end
+      resources :games, only: %i[show create update]
 
       post   '/games/:game_id/goals/:team', to: 'goals#create'
       delete '/games/:game_id/goals/:team', to: 'goals#cancel'

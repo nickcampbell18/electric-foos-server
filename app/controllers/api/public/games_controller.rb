@@ -10,6 +10,10 @@ module Api
         render json: Game.includes(teams: %i[player_one player_two]).find(params[:id])
       end
 
+      def current
+        render json: Game.current
+      end
+
     end
   end
 end
