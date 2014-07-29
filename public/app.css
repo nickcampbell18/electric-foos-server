@@ -9,7 +9,10 @@ img.mugshot {
 .list-group .mugshot {
   margin-right: 10px;
 }
-.list-group .name {
+.player_name {
+  font-weight: bold;
+}
+.list-group .player_name {
   vertical-align: middle;
 }
 .list-group .badge {

@@ -7,11 +7,11 @@
     players = Player.find(ids)
   %>
   <li class="list-group-item">
-    <%= image_tag players[0].mugshot, class: :mugshot %>
-    <%= content_tag :strong, players[0].name %>
+    <%= image_tag players[0].small_mugshot, class: :mugshot %>
+    <%= render 'name_with_link', locals:{player: players[0]} %>
     <div class="list-float-right">
-      <%= content_tag :strong, players[1].name %>
-      <%= image_tag players[1].mugshot, class: :mugshot %>
+      <%= render 'name_with_link', locals:{player: players[1]} %>
+      <%= image_tag players[1].small_mugshot, class: :mugshot %>
     </div>
 <% end %>
 </ul>

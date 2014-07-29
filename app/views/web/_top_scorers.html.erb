@@ -7,8 +7,8 @@
       <% next if idx > 6 %>
     <li class="list-group-item <%= 'list-group-item-success' if idx == 0 %>">
       <span class="badge"><%= pluralize(score, 'goal') %></span>
-      <%= image_tag player.mugshot, class: :mugshot %>
-      <strong class="name"><%= player.name %></strong>
+      <%= image_tag player.small_mugshot, class: :mugshot %>
+      <strong class="name"><%= render 'name_with_link', locals:{player: player} %></strong>
     </li>
   <% end %>
 </ul>

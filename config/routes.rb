@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     get '/stream', to: 'streams#stream'
   end
 
+  scope module: :web do
+    resources :players, only: :show
+  end
+
   get '/', to: 'web#index'
 
   mount Resque::Server, at: '/queue'

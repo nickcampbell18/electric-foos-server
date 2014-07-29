@@ -18,4 +18,8 @@ class Player < ActiveRecord::Base
     $1 if name =~ /(\w+)/
   end
 
+  def small_mugshot
+    mugshot.gsub(/256/, '50')
+  end
+
 end
