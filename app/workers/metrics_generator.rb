@@ -15,6 +15,8 @@ class MetricsGenerator
       end
     end
 
+    return if metrics.empty?
+
     keys_and_values = Array(metrics).flatten
 
     db.call [:del, Metrics::PLAYER]
