@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729093150) do
+ActiveRecord::Schema.define(version: 20140729182429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140729093150) do
     t.string "signatures",             default: [], array: true
     t.string "mugshot",    limit: 120
     t.string "permalink",  limit: 40
+    t.json   "stats"
   end
 
   add_index "players", ["signatures"], name: "index_players_on_signatures", using: :gin

@@ -10,7 +10,8 @@ class Player < ActiveRecord::Base
       signature: signatures,
       name:      name,
       mugshot:   mugshot,
-      permalink: permalink
+      permalink: permalink,
+      stats:     stats
     }
   end
 
