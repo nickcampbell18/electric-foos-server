@@ -5,7 +5,7 @@ class Game < ActiveRecord::Base
   has_many :teams
 
   scope :current, -> do
-    where(ended: false).order('updated_at DESC').limit(1).first
+    where('ended IS NOT true').order('updated_at DESC').limit(1).first
   end
 
   def as_json(*args)
