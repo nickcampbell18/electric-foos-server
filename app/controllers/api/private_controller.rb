@@ -2,7 +2,7 @@ require 'json'
 require 'redis'
 
 module Api
-  class ApplicationController < ::ApplicationController
+  class PrivateController < ::ApplicationController
 
     before_action :authenticate
 

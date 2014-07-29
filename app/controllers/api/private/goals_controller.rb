@@ -1,5 +1,6 @@
 module Api
-  class GoalsController < ApplicationController
+module Private
+  class GoalsController < PrivateController
 
     before_filter :ensure_required_create_params,
                   :require_game
@@ -60,4 +61,5 @@ module Api
     end
 
   end
+end
 end

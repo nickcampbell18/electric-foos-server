@@ -1,5 +1,6 @@
 module Api
-  class PlayersController < ApplicationController
+module Private
+  class PlayersController < PrivateController
 
     def create
       unless params[:permalink] && params[:signature]
@@ -20,4 +21,5 @@ module Api
     end
 
   end
+end
 end

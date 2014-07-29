@@ -3,26 +3,25 @@ require 'resque/server'
 Rails.application.routes.draw do
 
   namespace :api do
+    scope module: 'private' do
 
-    resources :games, only: %i[show create update] do
-      get :current, on: :collection
+      resources :games, only: %i[show create update] do
+        get :current, on: :collection
+      end
+
+      post   '/games/:game_id/goals/:team', to: 'goals#create'
+      delete '/games/:game_id/goals/:team', to: 'goals#cancel'
+
+      resources :players, only: :create
+
+      resources :signatures, only: :create
+
     end
 
-    post   '/games/:game_id/goals/:team', to: 'goals#create'
-    delete '/games/:game_id/goals/:team', to: 'goals#cancel'
-
-    resources :players, only: :create
-
-    resources :signatures, only: :create # Ask Ray to POST
-
-    get '/stream', to: 'streams#stream'
+    namespace :public do
+      resources :players, only: [:index, :show]
+    end
   end
-
-  scope module: :web do
-    resources :players, only: :show
-  end
-
-  get '/', to: 'web#index'
 
   mount Resque::Server, at: '/queue'
 

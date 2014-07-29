@@ -1,5 +1,6 @@
 module Api
-  class GamesController < ApplicationController
+module Private
+  class GamesController < PrivateController
 
     respond_to :json
 
@@ -55,4 +56,5 @@ module Api
     end
 
   end
+end
 end

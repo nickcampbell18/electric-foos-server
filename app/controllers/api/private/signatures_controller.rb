@@ -1,5 +1,6 @@
 module Api
-  class SignaturesController < ApplicationController
+module Private
+  class SignaturesController < PrivateController
 
     before_filter :ensure_required_create_params
 
@@ -20,4 +21,5 @@ module Api
     end
 
   end
+end
 end

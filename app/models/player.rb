@@ -4,10 +4,10 @@ class Player < ActiveRecord::Base
     where('? = ANY (signatures)', sig).first
   end
 
-  def as_json(signature: signatures.first)
+  def as_json(*args)
     {
       type:      :player,
-      signature: signature,
+      signature: signatures,
       name:      name,
       mugshot:   mugshot,
       permalink: permalink
