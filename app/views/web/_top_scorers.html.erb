@@ -2,12 +2,11 @@
   <% locals[:players_and_scores].
         sort_by {|h,v| - v.to_i }.
         each_with_index do |(player_id, score), idx| %>
-    <li class="list-group-item <%= 'list-group-item-success' if idx == 0 %>">
-      <span class="badge"><%= pluralize(score, 'goal') %></span>
       <% player = Player.find_by(id: player_id) %>
       <% next unless player %>
-      <% next if idx > 4 %>
-
+      <% next if idx > 6 %>
+    <li class="list-group-item <%= 'list-group-item-success' if idx == 0 %>">
+      <span class="badge"><%= pluralize(score, 'goal') %></span>
       <%= image_tag player.mugshot, class: :mugshot %>
       <strong class="name"><%= player.name %></strong>
     </li>
