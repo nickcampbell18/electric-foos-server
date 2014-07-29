@@ -9,6 +9,7 @@ class Player < ActiveRecord::Base
   def as_json(*args)
     {
       type:      :player,
+      id:        id,
       signature: signatures,
       name:      name,
       mugshot:   mugshot,
