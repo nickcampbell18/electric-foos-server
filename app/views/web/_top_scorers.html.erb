@@ -1,18 +1,15 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Rank</th>
-      <th>Player</th>
-      <th>Goals</th>
-    </tr>
-  </thead>
+<ul class="list-group">
   <% locals[:players_and_scores].
         sort_by {|h,v| - v.to_i }.
         each_with_index do |(player_id, score), idx| %>
-    <tr>
-      <td><%= idx + 1 %></td>
-      <td><%= Player.find(player_id).try(:name) %></td>
-      <td><%= score %></td>
-    </tr>
+    <li class="list-group-item <%= 'list-group-item-success' if idx == 0 %>">
+      <span class="badge"><%= pluralize(score, 'goal') %></span>
+      <% player = Player.find_by(id: player_id) %>
+      <% next unless player %>
+      <% next if idx > 4 %>
+
+      <%= image_tag player.mugshot, class: :mugshot %>
+      <strong class="name"><%= player.name %></strong>
+    </li>
   <% end %>
-</table>
+</ul>

@@ -14,4 +14,8 @@ class Player < ActiveRecord::Base
     }
   end
 
+  def first_name
+    $1 if name =~ /(\w+)/
+  end
+
 end

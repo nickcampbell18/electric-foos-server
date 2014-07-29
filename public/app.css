@@ -1,0 +1,27 @@
+img.mugshot {
+  width: 50px;
+  height: 50px;
+  border-radius: 3px;
+}
+.list-group-item {
+  padding-left: 11px;
+}
+.list-group .mugshot {
+  margin-right: 10px;
+}
+.list-group .name {
+  vertical-align: middle;
+}
+.list-group .badge {
+  margin-top: 14px;
+  line-height: inherit;
+  background-color: #428bca;
+}
+
+.list-float-right {
+  float: right;
+}
+.list-float-right img.mugshot {
+  margin-left: 10px;
+  margin-right: 0;
+}

@@ -1,12 +1,14 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-md-6">
-      <h1>All time top scorers</h1>
+      <h3>Top scorers</h3>
+      <hr />
       <%= render 'top_scorers', locals: {players_and_scores: @players_and_scores} %>
     </div>
     <div class="col-md-6">
-      <h1>Most effective teams</h1>
-      <%= render 'top_teams' %>
+      <h3>Most effective teams</h3>
+      <hr />
+      <%= render 'top_teams', locals: {teams_and_scores: @teams_and_scores} %>
     </div>
   </div>
 </div>
