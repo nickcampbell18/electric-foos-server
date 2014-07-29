@@ -27,7 +27,7 @@ class YammerUpdaterJob
 
   private
 
-  def fix_mugshot(url_template)
+  def self.fix_mugshot(url_template)
     url_template.gsub /\{(width|height)\}/, MUGSHOT_SIZE
   end
 
