@@ -2,11 +2,12 @@ module Api
   module Public
     class PlayersController < PublicController
 
-      respond_to :json
+      def index
+        render json: Player.all
+      end
 
       def show
-        @player = Player.find(params[:id])
-         render json: @player
+        render json: Player.find(params[:id])
       end
 
     end
