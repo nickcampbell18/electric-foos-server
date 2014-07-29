@@ -4,7 +4,7 @@ class Game < ActiveRecord::Base
 
   has_many :teams
 
-  scope :current, -> do
+  def self.current
     where('ended IS NOT true').order('updated_at DESC').limit(1).first
   end
 
