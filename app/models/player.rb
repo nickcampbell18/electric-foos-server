@@ -12,7 +12,8 @@ class Player < ActiveRecord::Base
       id:        id,
       signature: signatures,
       name:      name,
-      mugshot:   mugshot,
+      mugshot:   large_mugshot,
+      sm_mug:    small_mugshot,
       permalink: permalink,
       stats:     stats
     }
@@ -22,8 +23,12 @@ class Player < ActiveRecord::Base
     $1 if name =~ /(\w+)/
   end
 
+  def large_mugshot
+    self[:mugshot] || 'https://mug0.assets-yammer.com/mugshot/images/256x256/no_photo.png'
+  end
+
   def small_mugshot
-    mugshot.gsub(/256/, '50')
+    self[:mugshot] ? mugshot.gsub(/256/, '50') : 'https://mug0.assets-yammer.com/mugshot/images/50x50/no_photo.png'
   end
 
   private
