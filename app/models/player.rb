@@ -14,7 +14,7 @@ class Player < ActiveRecord::Base
       name:      name,
       mugshot:   mugshot,
       permalink: permalink,
-      stats:     DummyStats.new
+      stats:     stats
     }
   end
 
