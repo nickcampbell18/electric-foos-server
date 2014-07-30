@@ -10,19 +10,16 @@ module Private
         return render json: {errors: ['Team must be "silver" or "black"']}
       end
 
-      if scorer.score < 10
-        time = if params[:timestamp]
-          Time.parse(params[:timestamp])
-        else
-          Time.now
-        end
-        team.score_goal! time.to_i
-        if team.score == 10
-          game.update ended: true
-        end
-        Resque.push 'metrics', class: 'MetricsGenerator'
+      if team.score < 10
+        tstamp = URI.decode(params[:timestamp])
+        time = Time.parse(tstamp)
+        binding.pry
+        goal_time = (time - game.created_at).to_i
+        team.score_goal! goal_time
+        game.finish!(team) if team.score == 10
       end
 
+      Resque.push 'metrics', class: 'MetricsGenerator'
       Resque.push 'metrics', class: 'PlayerStatistician'
       Publisher.publish game
 
@@ -33,19 +30,13 @@ module Private
       if team
         score = team.score
         team.cancel_goal!
-        if score == 10
-          game.update ended: false
-        end
+        game.unfinish!(team) if score == 10
       end
 
       render json: game
     end
 
     private
-
-    def scorer
-      @_s ||= Scorer.new(team.id)
-    end
 
     def team
       @_t ||= Team.find_by_game_and_colour(game, params[:team])

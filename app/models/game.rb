@@ -33,4 +33,16 @@ class Game < ActiveRecord::Base
     teams.map(&:last_goal_time).max
   end
 
+  def finish!(team)
+    # Set the ended flag
+    update ended: true
+    # Mark a team as a winner
+    team.update won: true
+  end
+
+  def unfinish!(team)
+    update ended: false
+    team.update won: false
+  end
+
 end

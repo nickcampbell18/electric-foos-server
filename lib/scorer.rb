@@ -9,8 +9,9 @@ class Scorer
     run(:llen)
   end
 
-  def score_goal!(time=Time.now.to_i)
-    run(:rpush, time)
+  def score_goal!(seconds_since_game_start)
+    return score if seconds_since_game_start < 1
+    run(:rpush, seconds_since_game_start)
   end
 
   def cancel_goal!
@@ -19,11 +20,11 @@ class Scorer
   end
 
   def goal_times
-    run(:lrange, 0, -1).map { |seconds| Time.at seconds.to_i }
+    run(:lrange, 0, -1).map(&:to_i)
   end
 
   def last_goal_time
-    run(:lrange, -1, -1).map { |s| Time.at s.to_i }.first
+    run(:lrange, -1, -1).map(&:to_i).first
   end
 
   def score=(count)

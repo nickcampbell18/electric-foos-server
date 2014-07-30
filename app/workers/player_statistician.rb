@@ -30,9 +30,7 @@ class PlayerStatistician
   private
 
   def fastest_goal(teams)
-    teams.map(&:goal_times_in_seconds_since_start).
-          flatten.
-          min # Fastest goal in seconds since start
+    teams.map(&:goal_times).flatten.min
   end
 
   def total_wins(teams)

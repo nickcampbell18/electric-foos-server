@@ -17,7 +17,7 @@ class Team < ActiveRecord::Base
       colour:     team_colour,
       players:    players.map(&:as_json),
       score:      score,
-      goal_times: goal_times_in_seconds_since_start,
+      goal_times: goal_times,
       won?:       won?
     }
   end
@@ -35,13 +35,6 @@ class Team < ActiveRecord::Base
            :score_goal!, :cancel_goal!,
            :goal_times, :last_goal_time,
            to: :scorer
-
-  def goal_times_in_seconds_since_start
-    start_time = game.created_at
-    goal_times.map do |time|
-      (time - start_time).to_i
-    end
-  end
 
   private
 
