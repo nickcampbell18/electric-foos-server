@@ -33,6 +33,8 @@ module Private
         game.unfinish!(team) if score == 10
       end
 
+      Publisher.publish game
+
       render json: game
     end
 
