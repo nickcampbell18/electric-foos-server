@@ -17,8 +17,13 @@ class Team < ActiveRecord::Base
       colour:     team_colour,
       players:    players.map(&:as_json),
       score:      score,
-      goal_times: goal_times_in_seconds_since_start
+      goal_times: goal_times_in_seconds_since_start,
+      won?:       won?
     }
+  end
+
+  def self.find_all_by_player(player)
+    where('player_one_id = ? OR player_two_id = ?', player.id, player.id)
   end
 
   def self.find_by_game_and_colour(game, colour)
@@ -31,17 +36,17 @@ class Team < ActiveRecord::Base
            :goal_times, :last_goal_time,
            to: :scorer
 
-  private
-
-  def scorer
-    Scorer.new(id)
-  end
-
   def goal_times_in_seconds_since_start
     start_time = game.created_at
     goal_times.map do |time|
       (time - start_time).to_i
     end
+  end
+
+  private
+
+  def scorer
+    Scorer.new(id)
   end
 
 end

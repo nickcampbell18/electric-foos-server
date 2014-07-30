@@ -23,6 +23,7 @@ module Private
         Resque.push 'metrics', class: 'MetricsGenerator'
       end
 
+      Resque.push 'metrics', class: 'PlayerStatistician'
       Publisher.publish game
 
       render json: game
