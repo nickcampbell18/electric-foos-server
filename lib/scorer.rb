@@ -36,7 +36,7 @@ class Scorer
       items_to_remove.times { cancel_goal! }
     else
       items_to_add = count - goals_count
-      times = items_to_add.times.map { Time.now.to_i }
+      times = items_to_add.times.map { 1 }
       run(:rpush, times)
     end
 
