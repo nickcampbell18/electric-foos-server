@@ -11,8 +11,12 @@ module Private
       end
 
       if scorer.score < 10
-        time = params.fetch(:timestamp) { Time.now.to_i }
-        team.score_goal!(time)
+        time = if params[:timestamp]
+          Time.parse(params[:timestamp])
+        else
+          Time.now
+        end
+        team.score_goal! time.to_i
         if team.score == 10
           game.update ended: true
         end
