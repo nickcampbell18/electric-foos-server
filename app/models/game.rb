@@ -39,7 +39,7 @@ class Game < ActiveRecord::Base
   end
 
   def last_goal_time
-    teams.map(&:last_goal_time).max
+    teams.map(&:last_goal_time).compact.max
   end
 
   def finish!(team)
