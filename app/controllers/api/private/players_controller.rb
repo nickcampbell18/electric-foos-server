@@ -15,7 +15,7 @@ module Private
                                signatures: [params[:signature]]
       end
 
-      Resque.push 'players', class: 'YammerUpdaterJob',
+      Resque.push 'games', class: 'YammerUpdaterJob',
                              args: [player.id]
       head :ok
     end
