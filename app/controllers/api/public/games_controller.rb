@@ -3,11 +3,11 @@ module Api
     class GamesController < PublicController
 
       def index
-        render json: Game.includes(teams: %i[player_one player_two]).all
+        render json: Game.with_includes_and_sorted.all
       end
 
       def show
-        render json: Game.includes(teams: %i[player_one player_two]).find(params[:id])
+        render json: Game.with_includes_and_sorted.find(params[:id])
       end
 
       def current

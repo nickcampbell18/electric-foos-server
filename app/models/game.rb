@@ -5,16 +5,23 @@ class Game < ActiveRecord::Base
   has_many :teams
 
   def self.current
-    where('ended IS NOT true').order('updated_at DESC').limit(1).first
+    with_includes_and_sorted.where('ended IS NOT true').limit(1).first
+  end
+
+  def self.with_includes_and_sorted
+    order('updated_at DESC').
+    includes teams: [:player_one, :player_two]
   end
 
   def as_json(*args)
     {
-      type: :game,
-      id: id,
+      type:  :game,
+      id:    id,
       teams: teams.map(&:as_json),
+      ended: ended?,
       final_score: FINAL_SCORE,
-      ended: ended?
+      start_time:  created_at.iso8601,
+      end_time:    updated_at.iso8601
     }
   end
 
