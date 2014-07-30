@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
 
   FINAL_SCORE = 10
 
-  has_many :teams
+  has_many :teams, dependent: :destroy
 
   def self.current
     with_includes_and_sorted.where('ended IS NOT true').limit(1).first

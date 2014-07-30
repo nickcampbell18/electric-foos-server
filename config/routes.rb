@@ -22,9 +22,10 @@ Rails.application.routes.draw do
     namespace :public do
       resources :players, only: [:index, :show]
       resources :games,   only: [:index, :show]
+      resources :stats,   only: :index
     end
   end
 
-  mount Resque::Server, at: '/queue'
+  mount Resque::Server, at: '/api/queue'
 
 end

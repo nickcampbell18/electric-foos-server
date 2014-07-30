@@ -15,6 +15,7 @@ class PlayerStatistician
       stats[:total_games_played] = teams.count
       stats[:total_wins]         = total_wins(teams)
       stats[:best_score]         = best_score(teams)
+      stats[:worst_score]        = worst_score(teams)
       stats[:average_score]      = average_score(teams)
 
       all_streaks = streaks(teams)
@@ -39,6 +40,10 @@ class PlayerStatistician
 
   def best_score(teams)
     teams.map(&:score).max
+  end
+
+  def worst_score(teams)
+    teams.map(&:score).min
   end
 
   def average_score(teams)
