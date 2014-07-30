@@ -3,7 +3,7 @@ module Api
     class StatsController < PublicController
 
       def index
-        render json: DummyStats.new
+        render json: GlobalStatistician.new
       end
 
     end

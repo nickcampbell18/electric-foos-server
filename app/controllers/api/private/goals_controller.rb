@@ -19,8 +19,8 @@ module Private
         game.finish!(team) if team.score == 10
       end
 
-      Resque.push 'metrics', class: 'MetricsGenerator'
       Resque.push 'metrics', class: 'PlayerStatistician'
+      Resque.push 'metrics', class: 'GlobalStatistician'
       Publisher.publish game
 
       render json: game

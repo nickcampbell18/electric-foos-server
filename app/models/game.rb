@@ -21,8 +21,17 @@ class Game < ActiveRecord::Base
       ended: ended?,
       final_score: FINAL_SCORE,
       start_time:  created_at.iso8601,
-      end_time:    ended_time_if_needed
+      end_time:    ended_time_if_needed,
+      duration:    duration
     }
+  end
+
+  def duration
+    if ended
+      (updated_at - created_at).to_i
+    else
+      (Time.now - created_at).to_i
+    end
   end
 
   def ended_time_if_needed
