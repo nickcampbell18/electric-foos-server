@@ -6,6 +6,10 @@ class Player < ActiveRecord::Base
     where('? = ANY (signatures)', sig).first
   end
 
+  def self.all_complete
+    where('mugshot IS NOT NULL')
+  end
+
   def as_json(*args)
     {
       type:      :player,

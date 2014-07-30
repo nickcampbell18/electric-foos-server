@@ -3,7 +3,7 @@ module Api
     class PlayersController < PublicController
 
       def index
-        render json: Player.all
+        render json: Player.all_complete
       end
 
       def show
